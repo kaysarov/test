@@ -1,0 +1,44 @@
+{% extends 'lab/base.html' %}
+
+{% block head %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        [ {% for x in name %} '{{ x }}', {% endfor %} ]
+        {% for x in mass %} ,{{ x }} {% endfor %}
+        ]);
+
+        var options = {
+            title: "{{ title }}",
+            legend: { position: 'none' },
+            chartArea: { width: 600 },
+            bar: { gap: 1 },
+            backgroundColor: 'none',
+            histogram: {
+              maxNumBuckets: {{ max_st }},
+            }
+                };
+
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+       <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <button type="submit" class="btn btn-primary">Построить гистограмму</button>
+       </form>
+    </div>
+    <div class="col-md-9">
+        <div id="chart_div" style="height: 300px;"></div>
+    </div>
+  </div>
+{% endblock %}

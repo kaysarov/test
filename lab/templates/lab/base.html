@@ -1,0 +1,55 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://bootstraptema.ru/plugins/2016/bootsnav/bootsnav.css" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://bootstraptema.ru/plugins/2016/bootsnav/bootsnav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   {% block head %}
+   {% endblock %}
+  </head>
+  <body>
+   <div class="container">
+    <nav class="navbar navbar-default navbar-mobile bootsnav">
+     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+       <i class="fa fa-bars"></i>
+      </button>
+     </div>
+     <div class="collapse navbar-collapse" id="navbar-menu">
+      <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
+       <li><a href="{% url 'base' %}">Главная</a></li>
+       <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Равномерное распределение</a>
+        <ul class="dropdown-menu">
+         <li><a href="{% url 'rav' key='random' %}">Встроенная функция генерации случайных чисел Python</a></li>
+         <li><a href="{% url 'rav' key='kongr' %}">Метод простых конгруэнций</a></li>
+         <li><a href="{% url 'rav' key='lemer' %}">Метод линейной конгруэнтной последовательности Лемара</a></li>
+        </ul>
+       <li><a href="{% url 'trap' %}">Трапецеидальное распределение</a></li>
+       <li><a href="{% url 'treug' %}">Треугольное распределение</a></li>
+       <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Нормальное распределение</a>
+        <ul class="dropdown-menu">
+         <li><a href="{% url 'norm' key='norm' %}">Нормальное распределение</a></li>
+         <li><a href="{% url 'norm' key='sravn' %}">Сравнение со встроенной функцией</a></li>
+        </ul>
+       <li><a href="{% url 'exp' %}">Экспоненциальное распределение</a></li>
+       <li><a href="{% url 'giperexp' %}">Гиперэкспоненциальное распределение</a></li>
+       <li><a href="{% url 'erl' %}">Эрланговское распределение</a></li>
+      </ul>
+     </div>
+    </nav>
+    <div>
+     {% block content %}
+     {% endblock %}
+    </div>
+   </div>
+  </body>
+</html>
